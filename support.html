@@ -1,0 +1,406 @@
+<!doctype html>
+<title>Hamorine Support</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ee;
+    --surface: #fffdf8;
+    --text: #2b2620;
+    --subtle: #7e7466;
+    --accent: #2b2620;
+    --on-accent: #f7e3c0;
+    --line: #e8e0d3;
+    --line-strong: #d2c4ad;
+    color-scheme: light;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f0f13;
+      --surface: #1a1a21;
+      --text: #f4f2ee;
+      --subtle: #9c9aa5;
+      --accent: #e9b872;
+      --on-accent: #1e1606;
+      --line: #2c2c35;
+      --line-strong: #3f3f4a;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0f0f13;
+    --surface: #1a1a21;
+    --text: #f4f2ee;
+    --subtle: #9c9aa5;
+    --accent: #e9b872;
+    --on-accent: #1e1606;
+    --line: #2c2c35;
+    --line-strong: #3f3f4a;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    background: var(--bg);
+  }
+
+  body {
+    color: var(--text);
+    font-family: "Karla", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    padding-inline: 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+
+  h1, h2 {
+    font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", ui-rounded, sans-serif;
+    font-weight: 800;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+
+  a { color: var(--text); text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+  a:hover { text-decoration-color: currentColor; }
+
+  .page {
+    max-width: 700px;
+    margin-inline: auto;
+    padding-block: 56px 96px;
+  }
+
+  header.masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mark-glyph {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    flex: none;
+  }
+
+  .mark-name {
+    font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", ui-rounded, sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .lang-toggle button {
+    font: inherit;
+    font-family: "Karla", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: none;
+    background: transparent;
+    color: var(--subtle);
+    padding: 6px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .lang-toggle button[aria-pressed="true"] {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .titleblock h1 {
+    font-size: clamp(30px, 5vw, 40px);
+    margin: 0 0 10px;
+  }
+
+  .meta {
+    color: var(--subtle);
+    font-size: 14px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .meta span::before {
+    content: "";
+  }
+
+  section.policy { margin-top: 40px; }
+
+  section.policy section {
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 24px;
+  }
+
+  section.policy section:first-child {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin: 0 0 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  h2 .num {
+    font-family: "Karla", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--subtle);
+    letter-spacing: 0.02em;
+  }
+
+  section.policy p { margin: 0 0 14px; }
+  section.policy p:last-child { margin-bottom: 0; }
+
+  section.policy ul {
+    margin: 0 0 14px;
+    padding-left: 1.15em;
+  }
+
+  section.policy li { margin-bottom: 8px; }
+  section.policy li:last-child { margin-bottom: 0; }
+  section.policy li strong { font-weight: 700; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 0 0 14px;
+  }
+
+  .card p:last-child { margin-bottom: 0; }
+
+  footer.pagefoot {
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    color: var(--subtle);
+    font-size: 13.5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 480px) {
+    .page { padding-block: 40px 72px; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="mark">
+      <img class="mark-glyph" src="icon.png" alt="">
+      <span class="mark-name">Hamorine</span>
+    </div>
+    <div class="lang-toggle" role="group" aria-label="Language / 言語">
+      <button type="button" id="btn-ja" aria-pressed="true">日本語</button>
+      <button type="button" id="btn-en" aria-pressed="false">English</button>
+    </div>
+  </header>
+
+  <!-- ============================= 日本語 ============================= -->
+  <div id="lang-ja">
+
+    <div class="titleblock">
+      <h1>サポート</h1>
+      <div class="meta">
+        <span>Hamorine（iOS）についてのお問い合わせ・よくある質問</span>
+      </div>
+    </div>
+
+    <section class="policy">
+
+      <section id="ja-contact">
+        <h2><span class="num">01</span>お問い合わせ</h2>
+        <p>アプリの不具合報告・ご要望・その他ご質問は、下記のメールアドレスまでご連絡ください。内容を確認し、順次対応いたします。不具合のご報告の際は、お使いのiPhoneの機種とiOSのバージョンを添えていただけると助かります。</p>
+        <p><a href="mailto:app.contact001@gmail.com">app.contact001@gmail.com</a></p>
+      </section>
+
+      <section id="ja-howto">
+        <h2><span class="num">02</span>使い方</h2>
+        <ul>
+          <li><strong>録音してハモる</strong> — 歌を録音すると、あなたの声からハモリを作ります。ハモリの種類（上ハモリ・下ハモリ・5度上・1オクターブ上／下）、曲のキー、音量のバランス、エフェクトを選んで、「保存」や「共有」で書き出せます。</li>
+          <li><strong>リアルタイムでハモる</strong> — 有線イヤホンをつないで「スタート」を押すと、歌っている声にその場でハモリが付き、イヤホンから聞こえます。「録音する」をオンにすると、歌い終わったあとに聴き直して保存・共有できます。</li>
+        </ul>
+      </section>
+
+      <section id="ja-realtime">
+        <h2><span class="num">03</span>リアルタイムでハモれない</h2>
+        <p>リアルタイムでハモるには、<strong>有線イヤホン</strong>が必要です。スピーカーから鳴らすと音がマイクに戻ってハウリングするため、イヤホンをつないでいないときはスタートできません。</p>
+        <p><strong>Bluetoothイヤホン（AirPodsなど）は使えません。</strong>Bluetoothでは自分の声とハモリが0.2秒ほど遅れて聞こえ、うまく歌えないためです。iPhoneの端子（LightningまたはUSB-C）に直接つなぐイヤホンか、変換アダプタを使った有線イヤホンをお使いください。歌っている途中でイヤホンが外れると、自動で止まります。</p>
+      </section>
+
+      <section id="ja-mic">
+        <h2><span class="num">04</span>録音できない（マイクが使えない）</h2>
+        <p>マイクへのアクセスを許可していない可能性があります。iPhoneの「設定」→「Hamorine」→「マイク」をオンにしてください。</p>
+      </section>
+
+      <section id="ja-pitch">
+        <h2><span class="num">05</span>ハモリの音程が合わない</h2>
+        <p>ハモリは、選ばれている曲のキー（調）の音階に合わせて作ります。違和感があるときは、キーのところをタップして、歌っている曲のキーを選び直してください。録音は、なるべく静かな場所で、はっきりと歌うと、きれいなハモリになります。エアコンやパソコンのファンの音が気になるときは、「ノイズを抑える」をオンにしてください。</p>
+      </section>
+
+      <section id="ja-export">
+        <h2><span class="num">06</span>保存・共有するには</h2>
+        <p>「保存」または「共有」を押すと、動画広告を見るかをお尋ねします。動画広告を1本最後まで見ると、そのあと<strong>1時間のあいだ、保存と共有が何回でも</strong>できます。広告を読み込めなかったとき（オフラインのときなど）は、広告なしでそのまま保存・共有できます。</p>
+        <p>「保存」では、「ファイル」アプリの好きな場所にm4a形式の音声ファイルとして保存します。「共有」では、メッセージやSNSなど、共有シートで選んだアプリに送れます。</p>
+      </section>
+
+      <section id="ja-lost">
+        <h2><span class="num">07</span>録音が消えた</h2>
+        <p>録音は、お使いの端末内にのみ保存されているため、アプリを削除すると消えてしまいます。残しておきたい録音は、「保存」で「ファイル」アプリに書き出しておくことをおすすめします。</p>
+      </section>
+
+      <section id="ja-ads">
+        <h2><span class="num">08</span>広告について</h2>
+        <p>本アプリは、無料でご利用いただくために、画面の下にバナー広告を表示しています。また、保存・共有の前に動画広告を表示します。広告の取り扱いについては、<a href="index.html#ja-ads">プライバシーポリシーの「広告について」</a>をご覧ください。</p>
+      </section>
+
+    </section>
+
+    <footer class="pagefoot">
+      <span>© 2026 Hamorine</span>
+      <span><a href="index.html">プライバシーポリシー</a> ・ app.contact001@gmail.com</span>
+    </footer>
+
+  </div>
+
+  <!-- ============================= English ============================= -->
+  <div id="lang-en" hidden>
+
+    <div class="titleblock">
+      <h1>Support</h1>
+      <div class="meta">
+        <span>Contact and FAQ for Hamorine (iOS)</span>
+      </div>
+    </div>
+
+    <section class="policy">
+
+      <section id="en-contact">
+        <h2><span class="num">01</span>Contact</h2>
+        <p>For bug reports, requests, or any other questions, please email us at the address below. We will review your message and reply as soon as we can. When reporting a problem, it helps to include your iPhone model and iOS version.</p>
+        <p><a href="mailto:app.contact001@gmail.com">app.contact001@gmail.com</a></p>
+      </section>
+
+      <section id="en-howto">
+        <h2><span class="num">02</span>How to Use</h2>
+        <ul>
+          <li><strong>Record &amp; harmonize</strong> &mdash; Record your singing and the app creates a harmony from your voice. Choose the harmony type (3rd up, 3rd down, 5th up, octave up or down), the key of the song, the volume balance, and effects, then export with "Save" or "Share".</li>
+          <li><strong>Harmonize live</strong> &mdash; Connect wired earphones and tap "Start". A harmony is added to your singing in real time, and you hear it in your earphones. Turn on "Record" to listen back, save, and share after you finish singing.</li>
+        </ul>
+      </section>
+
+      <section id="en-realtime">
+        <h2><span class="num">03</span>I can't harmonize live</h2>
+        <p>Harmonizing live requires <strong>wired earphones</strong>. Playing through the speaker feeds back into the microphone and causes howling, so you can't start without earphones.</p>
+        <p><strong>Bluetooth earphones (such as AirPods) can't be used.</strong> With Bluetooth, your voice and the harmony reach your ears about 0.2 seconds late, which makes singing hard. Please use earphones that plug directly into your iPhone's port (Lightning or USB-C), or wired earphones with an adapter. If the earphones are unplugged while you sing, the app stops automatically.</p>
+      </section>
+
+      <section id="en-mic">
+        <h2><span class="num">04</span>I can't record (the microphone doesn't work)</h2>
+        <p>Microphone access may not be allowed. In the iPhone Settings app, go to Hamorine and turn on Microphone.</p>
+      </section>
+
+      <section id="en-pitch">
+        <h2><span class="num">05</span>The harmony sounds off</h2>
+        <p>The harmony follows the scale of the selected key. If it sounds off, tap the key and choose the key of the song you are singing. For a cleaner harmony, record in a quiet place and sing clearly. If air conditioner or computer fan noise bothers you, turn on "Reduce noise".</p>
+      </section>
+
+      <section id="en-export">
+        <h2><span class="num">06</span>How to save and share</h2>
+        <p>When you tap "Save" or "Share", the app asks whether you want to watch a video ad. Watch one video ad to the end, and you can <strong>save and share as many times as you like for 1 hour</strong>. If an ad can't be loaded (for example, when you are offline), you can save or share without one.</p>
+        <p>"Save" stores an m4a audio file anywhere you choose in the Files app. "Share" sends it to an app you choose in the share sheet, such as Messages or a social app.</p>
+      </section>
+
+      <section id="en-lost">
+        <h2><span class="num">07</span>My recordings disappeared</h2>
+        <p>Recordings are stored only on your device, so they are deleted if you delete the app. We recommend exporting the recordings you want to keep to the Files app with "Save".</p>
+      </section>
+
+      <section id="en-ads">
+        <h2><span class="num">08</span>Ads</h2>
+        <p>To keep the app free, it shows banner ads at the bottom of the screen, and a video ad before saving or sharing. For how ads handle data, see <a href="index.html#en-ads">"Advertising" in the Privacy Policy</a>.</p>
+      </section>
+
+    </section>
+
+    <footer class="pagefoot">
+      <span>© 2026 Hamorine</span>
+      <span><a href="index.html">Privacy Policy</a> ・ app.contact001@gmail.com</span>
+    </footer>
+
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var ja = document.getElementById('lang-ja');
+    var en = document.getElementById('lang-en');
+    var btnJa = document.getElementById('btn-ja');
+    var btnEn = document.getElementById('btn-en');
+
+    function show(lang) {
+      var isJa = lang === 'ja';
+      ja.hidden = !isJa;
+      en.hidden = isJa;
+      btnJa.setAttribute('aria-pressed', String(isJa));
+      btnEn.setAttribute('aria-pressed', String(!isJa));
+      try { localStorage.setItem('hamorine-privacy-lang', lang); } catch (e) {}
+    }
+
+    btnJa.addEventListener('click', function () { show('ja'); });
+    btnEn.addEventListener('click', function () { show('en'); });
+
+    var saved = null;
+    try { saved = localStorage.getItem('hamorine-privacy-lang'); } catch (e) {}
+
+    if (saved === 'en') {
+      show('en');
+    } else if (!saved && /^en/i.test(navigator.language || '')) {
+      show('en');
+    }
+  })();
+</script>
